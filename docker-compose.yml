@@ -1,0 +1,15 @@
+version: "3.5"
+services:
+  fravega-locations:
+    container_name: fravega-locations-server
+    build:
+      context: docker-fravega-locations-server
+      dockerfile: Dockerfile
+    image: fravega-locations:latest
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - ${APPLICATION_ROOT_FOLDER}:/usr/src/mymaven
