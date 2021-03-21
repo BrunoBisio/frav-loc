@@ -49,5 +49,14 @@ public class Square {
             this.y - this.height / 2 > node.getLatitude()
         );
     }
+
+    public boolean intersects(Square square) {
+        return !(
+            this.x + this.width < square.getX() - square.getWidth() ||
+            this.x - this.width > square.getX() + square.getWidth() ||
+            this.y + this.height < square.getY() - square.getHeight() ||
+            this.y - this.height > square.getY() + square.getHeight()
+        );
+    }
     
 }

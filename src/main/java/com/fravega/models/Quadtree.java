@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,17 +22,17 @@ public class Quadtree {
     // the first boundry should be (0, 0, 180, 90)
     @OneToOne
     private Square boundary;
-    private int maxNodes;
     @OneToMany
     private List<Node> nodes;
     private boolean divided = false;
-    @OneToOne
+    private int maxNodes;
+    @OneToOne(fetch = FetchType.LAZY)
     private Quadtree northEast;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Quadtree northWest;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Quadtree southEast;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Quadtree southWest;
    
     public Quadtree(Square boundry, int maxNodes) {
@@ -56,6 +57,26 @@ public class Quadtree {
         return maxNodes;
     }
 
+    public boolean isDivided() {
+        return this.divided;
+    }
+    
+    public Quadtree getNorthEast() {
+        return northEast;
+    }
+
+    public Quadtree getNorthWest() {
+        return northWest;
+    }
+
+    public Quadtree getSouthEast() {
+        return southEast;
+    }
+
+    public Quadtree getSouthWest() {
+        return southWest;
+    }
+
     public boolean addNode(Node node) {
         // if the node is does not belong to the boundry return false
         if (!boundary.contains(node))
@@ -66,7 +87,7 @@ public class Quadtree {
         } else {
             if (!this.divided)
                 this.subDivide();
-            
+                        
             if (this.northEast.addNode(node)) return true;
             if (this.northWest.addNode(node)) return true;
             if (this.southEast.addNode(node)) return true;
@@ -74,7 +95,7 @@ public class Quadtree {
         }
         return false;
     }
-    
+
     private void subDivide() {
         // init sub quadtrees
         // north east
@@ -120,10 +141,6 @@ public class Quadtree {
         }
 
         this.nodes.clear();
-    }
-
-    public ch.qos.logback.core.pattern.parser.Node getNodeByLocation(long latitude, long longitude) {
-        return null;
     }
 
 }

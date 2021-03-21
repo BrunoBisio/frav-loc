@@ -7,9 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Id;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="node_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Node {
 
     @Id
@@ -38,5 +41,9 @@ public abstract class Node {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public double getDistanceToPoint(double latitude, double longitude) {
+        return Math.sqrt((this.latitude-latitude)*(this.latitude-latitude) + (this.longitude-longitude)*(this.longitude-longitude));
     }
 }

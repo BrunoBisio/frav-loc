@@ -1,8 +1,10 @@
 package com.fravega.models;
 
 import javax.persistence.Entity;
+import javax.persistence.DiscriminatorValue;
 
 @Entity
+@DiscriminatorValue("1")
 public class PickupPoint extends Node {
     
     private int capacity;

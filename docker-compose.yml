@@ -1,15 +1,24 @@
-version: "3.5"
+version: "3.9"
 services:
-  fravega-locations:
-    container_name: fravega-locations-server
-    build:
-      context: docker-fravega-locations-server
-      dockerfile: Dockerfile
-    image: fravega-locations:latest
-    build:
-      context: .
-    ports:
-      - "8080:8080"
-      - "5005:5005"
+  fravega-mysql-container:
+    container_name: fravega-mysql-container
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=fravega-locations-db
+      - MYSQL_USER=bbisio
+      - MYSQL_PASSWORD=password
     volumes:
-      - ${APPLICATION_ROOT_FOLDER}:/usr/src/mymaven
+      - "/data/mysql"
+  fravega-locations-app-container:
+    container_name: fravega-locations-app-container
+    image: fravega-locations-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - fravega-mysql-container
+    ports:
+      - 8087:8080
+    volumes:
+      - "/data/spring-boot-app"

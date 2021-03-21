@@ -1,8 +1,10 @@
 package com.fravega.models;
 
 import javax.persistence.Entity;
+import javax.persistence.DiscriminatorValue;
 
 @Entity
+@DiscriminatorValue("2")
 public class Subsidiary extends Node {
     
     private String address;

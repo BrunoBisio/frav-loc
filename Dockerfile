@@ -1,9 +1,11 @@
 FROM maven:3.6.1-jdk-11-slim
 
-COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN apt-get update && apt-get install dos2unix && dos2unix /usr/local/bin/entrypoint.sh && chmod +x /usr/local/bin/entrypoint.sh
+WORKDIR /app
 
-#Start application
-WORKDIR /usr/src/mymaven
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["bash"]
+COPY . /app
+
+RUN mvn -v
+RUN mvn clean install -DskipTests
+EXPOSE 8080
+ADD ./target/fravega-0.0.1-SNAPSHOT.jar fravega-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","fravega-0.0.1-SNAPSHOT.jar"]
