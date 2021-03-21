@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 public class NodeService implements INodeService {
     
     // esto deberia correr cuando levanta la aplicacion
-    private Square boundry = new Square(0, 0, 180, 90);
-    private Quadtree quadTree = new Quadtree(boundry, 4);
+    // private Square boundry = new Square(0, 0, 180, 90);
+    // private Quadtree quadTree = new Quadtree(boundry, 4);
     
     @Autowired
     private QuadtreeRepository quadtreeRepository;
@@ -27,13 +27,13 @@ public class NodeService implements INodeService {
         grid.addNode(node);
     }
 
-    public Node pickClosest(long latitude, long longitude) throws Exception {
+    public Node getClosestNode(double latitude, double longitude) {
         List<Node> nearbyNodes = new LinkedList<Node>();
-        List<Quadtree> grid = quadtreeRepository.findAll();
+        Quadtree grid = quadtreeRepository.findFirstByOrderByIdAsc();
         // search until at least one node is found or the max for latitude and longitude analized has been reached
         for (int i = 5; nearbyNodes.size() == 0 || (latitude+i >= 180 && longitude+i >= 90); i+=5) {
             Square searchBoundry = new Square(latitude, longitude, i, i);
-            nearbyNodes = this.findNearbyNodes(searchBoundry, grid.get(0));
+            nearbyNodes = this.findNearbyNodes(searchBoundry, grid);
         }
         
         if (nearbyNodes.size() == 0)
@@ -54,6 +54,12 @@ public class NodeService implements INodeService {
         }
         
         return nearbyNodes.get(0);
+    }
+
+    public Node getNodeByPosition(double latitude, double longitude) {
+        Quadtree grid = quadtreeRepository.findFirstByOrderByIdAsc();
+        Node node = this.findNearbyNodes(new Square(latitude, longitude, 0, 0), grid).get(0);
+        return node;
     }
 
     private List<Node> findNearbyNodes(Square boundry, Quadtree quadtree) {

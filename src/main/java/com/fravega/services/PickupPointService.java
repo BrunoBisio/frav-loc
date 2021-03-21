@@ -19,15 +19,11 @@ public class PickupPointService implements IPickupPointService {
     
     /// PickupPoint ABM
     public PickupPoint createPickupPoint(PickupPoint pickupPoint) throws Exception {
-        if (getPickupPointByPosition(pickupPoint.getLongitude(), pickupPoint.getLatitude()) != null)
-            throw new Exception("Ya existe un punto de retiro en esta ubicación");
+        if (nodeService.getNodeByPosition(pickupPoint.getLatitude(), pickupPoint.getLongitude()) != null)
+            throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
         PickupPoint savedPickupPoint = repository.save(pickupPoint);
         nodeService.updateGridForAdd(savedPickupPoint);
         return savedPickupPoint;
-    }
-
-    private Object getPickupPointByPosition(double longitude, double latitude) {
-        return null;
     }
 
     public PickupPoint updatePickupPoint(int id, PickupPoint pickupPoint) {

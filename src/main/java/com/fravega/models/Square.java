@@ -13,31 +13,31 @@ public class Square {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false)
     private long Id;
-    private long x;
-    private long y;
-    private long width;
-    private long height;
+    private double x;
+    private double y;
+    private double width;
+    private double height;
     
-    public Square(long x, long y, long width, long height) {
+    public Square(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
     }
     
-    public long getX() {
+    public double getX() {
         return x;
     }
 
-    public long getY() {
+    public double getY() {
         return y;
     }
     
-    public long getWidth() {
+    public double getWidth() {
         return width;
     }
     
-    public long getHeight() {
+    public double getHeight() {
         return height;
     }
 

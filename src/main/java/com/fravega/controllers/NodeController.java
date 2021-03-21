@@ -17,7 +17,7 @@ public class NodeController {
     
     @GetMapping("/puntoMasCercano")
     public Node getClosestNode(@RequestBody long latitude, long longitude) throws Exception {
-        return service.pickClosest(latitude, longitude);
+        return service.getClosestNode(latitude, longitude);
     }
 
 }

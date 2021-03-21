@@ -26,13 +26,13 @@ public class Quadtree {
     private List<Node> nodes;
     private boolean divided = false;
     private int maxNodes;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Quadtree northEast;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Quadtree northWest;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Quadtree southEast;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Quadtree southWest;
    
     public Quadtree(Square boundry, int maxNodes) {

@@ -19,15 +19,11 @@ public class SubsidiaryService implements ISubsidiaryService {
 
     /// Subsidiary ABM
     public Subsidiary createSubsidiary(Subsidiary subsidiary) throws Exception {
-        if (getSubsidiaryByLocation(subsidiary.getLongitude(), subsidiary.getLatitude()) != null)
-            throw new Exception("Ya existe una sucursal en esta ubicación");
+        if (nodeService.getNodeByPosition(subsidiary.getLatitude(), subsidiary.getLongitude()) != null)
+            throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
         Subsidiary savedSubsidiary = repository.save(subsidiary);
         nodeService.updateGridForAdd(savedSubsidiary);
         return savedSubsidiary;
-    }
-
-    private Object getSubsidiaryByLocation(double longitude, double latitude) {
-        return null;
     }
 
     public Subsidiary updateSubsidiary(int id, Subsidiary subsidiary) {

@@ -8,6 +8,8 @@ services:
       - MYSQL_DATABASE=fravega-locations-db
       - MYSQL_USER=bbisio
       - MYSQL_PASSWORD=password
+    ports:
+      - 3307:3306
     volumes:
       - "/data/mysql"
   fravega-locations-app-container:
@@ -16,6 +18,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://fravega-mysql-container:3306/fravega-locations-db?autoReconnect=true&useSSL=false
     depends_on:
       - fravega-mysql-container
     ports:
