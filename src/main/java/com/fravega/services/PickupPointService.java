@@ -16,13 +16,15 @@ public class PickupPointService implements IPickupPointService {
     private PickupPointRepository repository;
     @Autowired
     private NodeService nodeService;
+    @Autowired
+    private QuadtreeService quadtreeService;
     
     /// PickupPoint ABM
     public PickupPoint createPickupPoint(PickupPoint pickupPoint) throws Exception {
         if (nodeService.getNodeByPosition(pickupPoint.getLatitude(), pickupPoint.getLongitude()) != null)
             throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
         PickupPoint savedPickupPoint = repository.save(pickupPoint);
-        nodeService.updateGridForAdd(savedPickupPoint);
+        quadtreeService.updateGridForAdd(savedPickupPoint);
         return savedPickupPoint;
     }
 

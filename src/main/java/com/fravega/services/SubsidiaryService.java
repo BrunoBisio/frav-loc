@@ -16,13 +16,15 @@ public class SubsidiaryService implements ISubsidiaryService {
     private SubsidiaryRepository repository;
     @Autowired
     private NodeService nodeService;
+    @Autowired
+    private QuadtreeService quadtreeService;
 
     /// Subsidiary ABM
     public Subsidiary createSubsidiary(Subsidiary subsidiary) throws Exception {
         if (nodeService.getNodeByPosition(subsidiary.getLatitude(), subsidiary.getLongitude()) != null)
             throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
         Subsidiary savedSubsidiary = repository.save(subsidiary);
-        nodeService.updateGridForAdd(savedSubsidiary);
+        quadtreeService.updateGridForAdd(savedSubsidiary);
         return savedSubsidiary;
     }
 

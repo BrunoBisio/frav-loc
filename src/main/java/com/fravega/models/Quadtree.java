@@ -77,70 +77,43 @@ public class Quadtree {
         return southWest;
     }
 
-    public boolean addNode(Node node) {
-        // if the node is does not belong to the boundry return false
-        if (!boundary.contains(node))
-            return false;
-
-        if (!this.divided && nodes.size() < maxNodes) {
-            nodes.add(node);
-        } else {
-            if (!this.divided)
-                this.subDivide();
-                        
-            if (this.northEast.addNode(node)) return true;
-            if (this.northWest.addNode(node)) return true;
-            if (this.southEast.addNode(node)) return true;
-            if (this.southWest.addNode(node)) return true;
-        }
-        return false;
+    public void setNodes(List<Node> nodes) {
+        this.nodes = nodes;
     }
 
-    private void subDivide() {
-        // init sub quadtrees
-        // north east
-        Square ne = new Square(
-            this.boundary.getX() + this.boundary.getWidth() / 2, 
-            this.boundary.getY() - this.boundary.getHeight() / 2, 
-            this.boundary.getWidth() / 2,
-            this.boundary.getHeight() / 2);
-        
-        // north west
-        Square nw = new Square(
-            this.boundary.getX() - this.boundary.getWidth() / 2, 
-            this.boundary.getY() - this.boundary.getHeight() / 2, 
-            this.boundary.getWidth() / 2,
-            this.boundary.getHeight() / 2);
-        
-        // south east
-        Square se = new Square(
-            this.boundary.getX() + this.boundary.getWidth() / 2, 
-            this.boundary.getY() + this.boundary.getHeight() / 2, 
-            this.boundary.getWidth() / 2,
-            this.boundary.getHeight() / 2);
-        
-        // south west
-        Square sw = new Square(
-            this.boundary.getX() - this.boundary.getWidth() / 2, 
-            this.boundary.getY() + this.boundary.getHeight() / 2, 
-            this.boundary.getWidth() / 2,
-            this.boundary.getHeight() / 2);
-        
-        this.northEast = new Quadtree(ne, this.maxNodes);
-        this.northWest = new Quadtree(nw, this.maxNodes);
-        this.southWest = new Quadtree(sw, this.maxNodes);
-        this.southEast = new Quadtree(se, this.maxNodes);
-        this.divided = true;
-
-        // re insert all stored nodes
-        for (Node storedNode : nodes) {
-            if (this.northEast.addNode(storedNode)) { continue; }
-            else if (this.northWest.addNode(storedNode)) { continue; }
-            else if (this.southEast.addNode(storedNode)) { continue; }
-            else if (this.southWest.addNode(storedNode)) { continue; }
-        }
-
-        this.nodes.clear();
+    public void setDivided(boolean divided) {
+        this.divided = divided;
     }
 
+    public void setMaxNodes(int maxNodes) {
+        this.maxNodes = maxNodes;
+    }
+
+    public void setNorthEast(Quadtree northEast) {
+        this.northEast = northEast;
+    }
+
+    public void setNorthWest(Quadtree northWest) {
+        this.northWest = northWest;
+    }
+
+    public void setSouthEast(Quadtree southEast) {
+        this.southEast = southEast;
+    }
+
+    public void setSouthWest(Quadtree southWest) {
+        this.southWest = southWest;
+    }
+
+    public void addNode(Node node) {
+        this.nodes.add(node);
+    }
+
+    public boolean contains(Node node) {
+        return this.boundary.contains(node);
+    }
+
+    public boolean isFull(){
+        return this.maxNodes <= this.nodes.size();
+    }
 }

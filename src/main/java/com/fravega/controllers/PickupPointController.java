@@ -18,7 +18,7 @@ public class PickupPointController {
     private IPickupPointService service;
 
     @PostMapping("/puntoDeRetiro")
-    public PickupPoint newPickupPoint(@RequestBody PickupPoint pickupPoint) throws Exception {
+    public PickupPoint addPickupPoint(@RequestBody PickupPoint pickupPoint) throws Exception {
         return service.createPickupPoint(pickupPoint);
     }
 

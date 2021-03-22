@@ -3,26 +3,29 @@ services:
   fravega-mysql-container:
     container_name: fravega-mysql-container
     image: mysql:latest
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=fravega-locations-db
-      - MYSQL_USER=bbisio
-      - MYSQL_PASSWORD=password
+      MYSQL_DATABASE: 'fravega_locations_db'
+      MYSQL_USER: 'user123'
+      MYSQL_PASSWORD: 'password123'
+      MYSQL_ROOT_PASSWORD: 'password123'
     ports:
-      - 3307:3306
+      - 3307:3307
+    expose: 
+      - '3307'
     volumes:
-      - "/data/mysql"
+      - '/data/mysql'
   fravega-locations-app-container:
     container_name: fravega-locations-app-container
-    image: fravega-locations-image
+    image: spring-boot-jpa-image
     build:
       context: ./
       dockerfile: Dockerfile
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://fravega-mysql-container:3306/fravega-locations-db?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://fravega-mysql-container:3307/fravega-locations-db?autoReconnect=true&useSSL=false
     depends_on:
       - fravega-mysql-container
     ports:
       - 8087:8080
     volumes:
-      - "/data/spring-boot-app"
+      - '/data/spring-boot-app'

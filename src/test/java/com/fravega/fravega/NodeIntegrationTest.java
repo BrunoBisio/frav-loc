@@ -1,23 +1,19 @@
 package com.fravega.fravega;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
+@AutoConfigureMockMvc
 class NodeIntegrationTest {
 
-	@LocalServerPort
-	private int port;
-
-	@Autowired
-	private TestRestTemplate restTemplate;
-
-	/*@Test
-	void contextLoads() {
-		this.restTemplate.postForEntity("http://localhost:", request, responseType, urlVariables)
-	}*/
+	@Test
+	void GetClosestNodeTest() {
+	}
 
 }

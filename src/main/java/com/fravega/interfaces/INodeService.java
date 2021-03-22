@@ -4,8 +4,8 @@ import com.fravega.models.Node;
 
 public interface INodeService {
 
-    public Node getClosestNode(double latitude, double longitude) throws Exception;
+    public Node getClosestNode(double latitude, double longitude);
 
-    public void updateGridForAdd(Node node);
-    
+    public Node getNodeByPosition(double latitude, double longitude);
+
 }

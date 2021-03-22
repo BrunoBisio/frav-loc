@@ -7,7 +7,6 @@ import com.fravega.interfaces.INodeService;
 import com.fravega.models.Node;
 import com.fravega.models.Quadtree;
 import com.fravega.models.Square;
-import com.fravega.repositories.QuadtreeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,21 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class NodeService implements INodeService {
     
-    // esto deberia correr cuando levanta la aplicacion
-    // private Square boundry = new Square(0, 0, 180, 90);
-    // private Quadtree quadTree = new Quadtree(boundry, 4);
-    
     @Autowired
-    private QuadtreeRepository quadtreeRepository;
-
-    public void updateGridForAdd(Node node) {
-        Quadtree grid = quadtreeRepository.findFirstByOrderByIdAsc();
-        grid.addNode(node);
-    }
+    private QuadtreeService quadtreeService;
 
     public Node getClosestNode(double latitude, double longitude) {
         List<Node> nearbyNodes = new LinkedList<Node>();
-        Quadtree grid = quadtreeRepository.findFirstByOrderByIdAsc();
+        Quadtree grid = quadtreeService.getRootOrInit();
         // search until at least one node is found or the max for latitude and longitude analized has been reached
         for (int i = 5; nearbyNodes.size() == 0 || (latitude+i >= 180 && longitude+i >= 90); i+=5) {
             Square searchBoundry = new Square(latitude, longitude, i, i);
@@ -57,7 +47,7 @@ public class NodeService implements INodeService {
     }
 
     public Node getNodeByPosition(double latitude, double longitude) {
-        Quadtree grid = quadtreeRepository.findFirstByOrderByIdAsc();
+        Quadtree grid = quadtreeService.getRootOrInit();
         Node node = this.findNearbyNodes(new Square(latitude, longitude, 0, 0), grid).get(0);
         return node;
     }
