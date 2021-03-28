@@ -16,8 +16,8 @@ public class NodeController {
     private INodeService service;
     
     @GetMapping("/puntoMasCercano")
-    public Node getClosestNode(@RequestBody long latitude, long longitude) throws Exception {
-        return service.getClosestNode(latitude, longitude);
+    public Node getClosestNode(@RequestBody long longitude, long latitude) throws Exception {
+        return service.getClosestNode(longitude, latitude);
     }
 
 }

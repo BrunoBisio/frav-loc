@@ -2,11 +2,10 @@ package com.fravega.repositories;
 
 import com.fravega.models.Subsidiary;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SubsidiaryRepository extends JpaRepository<Subsidiary, Integer> {
+public interface SubsidiaryRepository extends NodeRepository<Subsidiary> {
 
-    Subsidiary findBySubsidiaryId(int subsidiaryId);
+    Subsidiary findBySubsidiaryId(long subsidiaryId);
 }

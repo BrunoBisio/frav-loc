@@ -9,7 +9,7 @@ public class PickupPoint extends Node {
     
     private int capacity;
 
-    public PickupPoint (int capacity, long longitude, long latitude) {
+    public PickupPoint (int capacity, double longitude, double latitude) {
         super(longitude, latitude);
         this.capacity = capacity;
     }

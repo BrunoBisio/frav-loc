@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.fravega.interfaces.INodeService;
+import com.fravega.interfaces.IQuadtreeService;
 import com.fravega.models.Node;
 import com.fravega.models.Quadtree;
 import com.fravega.models.Square;
@@ -15,14 +16,14 @@ import org.springframework.stereotype.Service;
 public class NodeService implements INodeService {
     
     @Autowired
-    private QuadtreeService quadtreeService;
+    private IQuadtreeService quadtreeService;
 
-    public Node getClosestNode(double latitude, double longitude) {
+    public Node getClosestNode(double longitude, double latitude) {
         List<Node> nearbyNodes = new LinkedList<Node>();
         Quadtree grid = quadtreeService.getRootOrInit();
         // search until at least one node is found or the max for latitude and longitude analized has been reached
-        for (int i = 5; nearbyNodes.size() == 0 || (latitude+i >= 180 && longitude+i >= 90); i+=5) {
-            Square searchBoundry = new Square(latitude, longitude, i, i);
+        for (int i = 5; nearbyNodes.size() == 0 || (longitude+i >= 90 && latitude+i >= 180); i+=5) {
+            Square searchBoundry = new Square(longitude, latitude, i, i);
             nearbyNodes = this.findNearbyNodes(searchBoundry, grid);
         }
         

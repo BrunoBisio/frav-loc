@@ -6,10 +6,10 @@ public interface ISubsidiaryService {
     
     public Subsidiary createSubsidiary(Subsidiary subsidiary) throws Exception;
 
-    public Subsidiary updateSubsidiary(int id, Subsidiary subsidiary);
+    public Subsidiary updateSubsidiary(long id, Subsidiary subsidiary);
 
-    public boolean deleteSubsidiary(int id);
+    public boolean deleteSubsidiary(long id);
 
-    public Subsidiary getSubsidiaryById(int id);
+    public Subsidiary getSubsidiaryById(long id);
 
 }

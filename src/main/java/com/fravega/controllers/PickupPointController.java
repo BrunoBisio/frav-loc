@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,18 +23,18 @@ public class PickupPointController {
         return service.createPickupPoint(pickupPoint);
     }
 
-    @PostMapping("/puntoDeRetiro/{id}")
-    public PickupPoint updatePickupPoint(@RequestParam int id, @RequestBody PickupPoint pickupPoint) {
+    @PutMapping("/puntoDeRetiro/{id}")
+    public PickupPoint updatePickupPoint(@RequestParam long id, @RequestBody PickupPoint pickupPoint) {
         return service.updatePickupPoint(id, pickupPoint);
     }
 
     @GetMapping("/puntoDeRetiro/{id}")
-    public PickupPoint getPickupPoint(@RequestParam int id) {
+    public PickupPoint getPickupPoint(@RequestParam long id) {
         return service.getPickupPointById(id);
     }
 
     @DeleteMapping("/puntoDeRetiro/{id}")
-    public boolean deletePickupPoint(@RequestParam int id) {
+    public boolean deletePickupPoint(@RequestParam long id) {
         return service.deletePickupPoint(id);
     }
 }

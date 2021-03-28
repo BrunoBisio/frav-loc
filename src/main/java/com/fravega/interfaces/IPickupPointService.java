@@ -6,10 +6,10 @@ public interface IPickupPointService {
 
     public PickupPoint createPickupPoint(PickupPoint pickupPoint) throws Exception;
 
-    public PickupPoint updatePickupPoint(int id, PickupPoint pickupPoint);
+    public PickupPoint updatePickupPoint(long id, PickupPoint pickupPoint);
 
-    public boolean deletePickupPoint(int id);
+    public boolean deletePickupPoint(long id);
 
-    public PickupPoint getPickupPointById(int id);
+    public PickupPoint getPickupPointById(long id);
 
 }

@@ -2,7 +2,9 @@ package com.fravega.services;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.fravega.interfaces.INodeService;
 import com.fravega.interfaces.IPickupPointService;
+import com.fravega.interfaces.IQuadtreeService;
 import com.fravega.models.PickupPoint;
 import com.fravega.repositories.PickupPointRepository;
 
@@ -15,11 +17,10 @@ public class PickupPointService implements IPickupPointService {
     @Autowired
     private PickupPointRepository repository;
     @Autowired
-    private NodeService nodeService;
+    private INodeService nodeService;
     @Autowired
-    private QuadtreeService quadtreeService;
+    private IQuadtreeService quadtreeService;
     
-    /// PickupPoint ABM
     public PickupPoint createPickupPoint(PickupPoint pickupPoint) throws Exception {
         if (nodeService.getNodeByPosition(pickupPoint.getLatitude(), pickupPoint.getLongitude()) != null)
             throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
@@ -28,13 +29,13 @@ public class PickupPointService implements IPickupPointService {
         return savedPickupPoint;
     }
 
-    public PickupPoint updatePickupPoint(int id, PickupPoint pickupPoint) {
+    public PickupPoint updatePickupPoint(long id, PickupPoint pickupPoint) {
         PickupPoint savedPickupPoint = getPickupPointById(id);
         savedPickupPoint.setCapacity(pickupPoint.getCapacity());
         return repository.save(savedPickupPoint);
     }
 
-    public boolean deletePickupPoint(int id) {
+    public boolean deletePickupPoint(long id) {
         try {
             repository.delete(getPickupPointById(id));
             return true;
@@ -43,7 +44,7 @@ public class PickupPointService implements IPickupPointService {
         }
     }
 
-    public PickupPoint getPickupPointById(int id) {
+    public PickupPoint getPickupPointById(long id) {
         PickupPoint savedPickupPoint = repository.findById(id).get();
         if (savedPickupPoint == null)
             throw new EntityNotFoundException(String.format("El Punto de retiro con Id {0} no existe", id));
