@@ -9,7 +9,6 @@ import com.fravega.models.Square;
 import com.fravega.models.Subsidiary;
 import com.fravega.repositories.QuadtreeRepository;
 import com.fravega.services.QuadtreeService;
-import com.fravega.utils.TestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

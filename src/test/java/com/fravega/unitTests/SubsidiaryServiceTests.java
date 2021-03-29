@@ -9,7 +9,6 @@ import com.fravega.repositories.SubsidiaryRepository;
 import com.fravega.services.NodeService;
 import com.fravega.services.QuadtreeService;
 import com.fravega.services.SubsidiaryService;
-import com.fravega.utils.TestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
