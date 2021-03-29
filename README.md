@@ -2,8 +2,9 @@
 
 ## Para poder correr la aplicacion en local es necesario que corra el siguiente comando
 
-### mvn install
-
+```
+    mvn clean spring-boot:run
+```
 ## Los endpoints expuestos por la API son:
 
 ## Punto de Retiro
