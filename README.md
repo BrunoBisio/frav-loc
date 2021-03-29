@@ -2,12 +2,15 @@
 
 ## Para poder correr la aplicacion en local es necesario que corra el siguiente comando
 
-### mvn install
-
+```
+    mvn clean spring-boot:run
+```
 ## Los endpoints expuestos por la API son:
 
 ## Punto de Retiro
 
+| Tipo | URL |
+| --- | --- |
 | GET | https://localhost:8080/puntoDeRetiro |
 | PUT | https://localhost:8080/puntoDeRetiro/{id} |
 | DELETE | https://localhost:8080/puntoDeRetiro/{id} |
@@ -26,6 +29,8 @@
 
 ## Sucursal
 
+| Tipo | URL |
+| --- | --- |
 | GET | https://localhost:8080/sucursal |
 | PUT | https://localhost:8080/sucursal/{id} |
 | DELETE | https://localhost:8080/sucursal/{id} |
@@ -46,6 +51,8 @@
 
 ## Obtener el punto mas cercano
 
+| Tipo | URL |
+| --- | --- |
 | GET | https://localhost:8080/puntoMasCercano/{longitud}/{latitud} |
 
 
