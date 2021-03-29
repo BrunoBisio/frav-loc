@@ -42,7 +42,7 @@ public class Square {
     }
 
     public boolean contains(Node node) {
-        return (
+        return !(
             this.x + this.width / 2 < node.getLongitude() ||
             this.x - this.width / 2 > node.getLongitude() ||
             this.y + this.height / 2 < node.getLatitude() ||
@@ -52,10 +52,10 @@ public class Square {
 
     public boolean intersects(Square square) {
         return !(
-            this.x + this.width < square.getX() - square.getWidth() ||
-            this.x - this.width > square.getX() + square.getWidth() ||
-            this.y + this.height < square.getY() - square.getHeight() ||
-            this.y - this.height > square.getY() + square.getHeight()
+            this.x + this.width/2 < square.getX() - square.getWidth() ||
+            this.x - this.width/2 > square.getX() + square.getWidth() ||
+            this.y + this.height/2 < square.getY() - square.getHeight() ||
+            this.y - this.height/2 > square.getY() + square.getHeight()
         );
     }
     

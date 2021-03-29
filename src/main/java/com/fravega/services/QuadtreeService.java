@@ -15,7 +15,7 @@ public class QuadtreeService implements IQuadtreeService {
     @Autowired
     private QuadtreeRepository quadtreeRepository;
 
-    public void updateGridForAdd(Node node) throws Exception {
+    public void addNodeToGrid(Node node) throws Exception {
         Quadtree grid = this.getRootOrInit();
         if (this.addNode(grid, node)) {
             quadtreeRepository.save(grid);
@@ -34,12 +34,12 @@ public class QuadtreeService implements IQuadtreeService {
         return quadtree;
     }
 
-    public boolean addNode(Quadtree quadtree, Node node) {
+    private boolean addNode(Quadtree quadtree, Node node) {
         // if the node is does not belong to the boundry return false
         if (!quadtree.contains(node))
             return false;
 
-        if (!quadtree.isDivided() && quadtree.isFull()) {
+        if (!quadtree.isDivided() && !quadtree.isFull()) {
             quadtree.addNode(node);
         } else {
             if (!quadtree.isDivided())
@@ -79,28 +79,28 @@ public class QuadtreeService implements IQuadtreeService {
         // north east
         Square ne = new Square(
             boundary.getX() + boundary.getWidth() / 2, 
-            boundary.getY() - boundary.getHeight() / 2, 
+            boundary.getY() + boundary.getHeight() / 2, 
             boundary.getWidth() / 2,
             boundary.getHeight() / 2);
         
         // north west
         Square nw = new Square(
             boundary.getX() - boundary.getWidth() / 2, 
-            boundary.getY() - boundary.getHeight() / 2, 
+            boundary.getY() + boundary.getHeight() / 2, 
             boundary.getWidth() / 2,
             boundary.getHeight() / 2);
         
         // south east
         Square se = new Square(
-            boundary.getX() + boundary.getWidth() / 2, 
-            boundary.getY() + boundary.getHeight() / 2, 
+            boundary.getX() + boundary.getWidth() / 2,
+            boundary.getY() - boundary.getHeight() / 2, 
             boundary.getWidth() / 2,
             boundary.getHeight() / 2);
         
         // south west
         Square sw = new Square(
-            boundary.getX() - boundary.getWidth() / 2, 
-            boundary.getY() + boundary.getHeight() / 2,
+            boundary.getX() - boundary.getWidth() / 2,
+            boundary.getY() - boundary.getHeight() / 2,
             boundary.getWidth() / 2,
             boundary.getHeight() / 2);
         

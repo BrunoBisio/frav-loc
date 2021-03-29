@@ -25,7 +25,7 @@ public class SubsidiaryService implements ISubsidiaryService {
         if (nodeService.getNodeByPosition(subsidiary.getLatitude(), subsidiary.getLongitude()) != null)
             throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
         Subsidiary savedSubsidiary = repository.save(subsidiary);
-        quadtreeService.updateGridForAdd(savedSubsidiary);
+        quadtreeService.addNodeToGrid(savedSubsidiary);
         return savedSubsidiary;
     }
 

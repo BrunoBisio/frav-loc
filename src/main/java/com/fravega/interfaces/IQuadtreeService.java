@@ -5,10 +5,8 @@ import com.fravega.models.Quadtree;
 
 public interface IQuadtreeService {
 
-    public void updateGridForAdd(Node node) throws Exception;
+    public void addNodeToGrid(Node node) throws Exception;
 
     public Quadtree getRootOrInit();
-
-    public boolean addNode(Quadtree quadtree, Node node);
 
 }

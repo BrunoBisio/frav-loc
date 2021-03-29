@@ -25,7 +25,7 @@ public class PickupPointService implements IPickupPointService {
         if (nodeService.getNodeByPosition(pickupPoint.getLatitude(), pickupPoint.getLongitude()) != null)
             throw new Exception("Ya se ha registrado una sucursal o punto de venta en esta ubicación");
         PickupPoint savedPickupPoint = repository.save(pickupPoint);
-        quadtreeService.updateGridForAdd(savedPickupPoint);
+        quadtreeService.addNodeToGrid(savedPickupPoint);
         return savedPickupPoint;
     }
 
