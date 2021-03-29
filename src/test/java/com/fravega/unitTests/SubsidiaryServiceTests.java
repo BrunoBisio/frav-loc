@@ -34,7 +34,7 @@ public class SubsidiaryServiceTests {
     @Test
     public void createSubsidiaryTest() {
         // Prepare
-        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, TestUtils.getRandomLongitude(), TestUtils.getRandomLatitude());
+        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, 20, 20);
         Subsidiary savedSubsidiary = null;
         
         // Mock
@@ -58,7 +58,7 @@ public class SubsidiaryServiceTests {
     @Test
     public void createSubsidiaryDuplicatedTest() {
         // Prepare
-        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, TestUtils.getRandomLongitude(), TestUtils.getRandomLatitude());
+        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, 20, 20);
 
         // Mock
         Mockito

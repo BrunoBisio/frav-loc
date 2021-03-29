@@ -29,7 +29,7 @@ public class QuadtreeServiceTests {
     @Test
     public void addNodeToGridTest() {
         // Init
-        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, TestUtils.getRandomLongitude(), TestUtils.getRandomLatitude());
+        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, 20, 20);
         Quadtree testGrid = new Quadtree(new Square(0, 0, 180, 90), 4);
         
         // Mock
@@ -49,7 +49,7 @@ public class QuadtreeServiceTests {
     @Test
     public void addNodeToGridOutOfRangeTest() {
         // Init
-        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, TestUtils.getRandomLongitude(), TestUtils.getRandomLatitude());
+        Subsidiary sub = new Subsidiary("some address ", 8.0 , 16.0, 20, 20);
         Quadtree testGrid = new Quadtree(new Square(0, 0, 5, 5), 4);
 
         // Mock
