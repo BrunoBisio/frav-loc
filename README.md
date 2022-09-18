@@ -25,7 +25,16 @@
         latitude: -58.5235249
     }
 ```
+### Para las llamadas GET se recibira un JSON con el siguiente formato:
 
+```
+    {
+        "id": 1,
+        "longitude": 15.1515,
+        "latitude": 13.1515,
+        "capacity": 3
+    }
+```
 
 ## Sucursal
 
@@ -45,6 +54,19 @@
         openTo: 18,
         longitude: -34.5608601,
         latitude: -58.5235249
+    }
+```
+
+### Para las llamadas GET se recibira un JSON con el siguiente formato:
+
+```
+    {
+        "id": 2,
+        "longitude": 15.1515,
+        "latitude": 13.1515,
+        "address": "Balvanera 1553",
+        "openFrom": 10.00,
+        "openTo": 18.00
     }
 ```
 
